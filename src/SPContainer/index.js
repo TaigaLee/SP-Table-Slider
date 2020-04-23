@@ -11,8 +11,12 @@ class SPTable extends React.Component {
     };
   }
 
+  // put slider here
+  // probably have a change data function here for the slider
+  // slider thing
+
   render() {
-    return <SPList data={this.state.data} />;
+    return <SPList data={this.state.data.reverse()} />;
   }
 }
 
