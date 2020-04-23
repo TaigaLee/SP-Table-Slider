@@ -1,10 +1,14 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
+import SPContainer from "./SPContainer";
 
 class App extends React.Component {
   render() {
-    return <div className="App">Hello world</div>;
+    return (
+      <div>
+        <SPContainer />
+      </div>
+    );
   }
 }
 
