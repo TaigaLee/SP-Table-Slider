@@ -1,15 +1,19 @@
 import React from "react";
+import { Table } from "semantic-ui-react";
 
 function SPList(props) {
-  console.log(props.data);
-
   const listData = props.data.map(dataPiece => (
-    <li>
-      {dataPiece.year} {dataPiece.totalReturn}{" "}
-    </li>
+    <Table.Row key={dataPiece.year}>
+      <Table.Cell>{dataPiece.year}</Table.Cell>
+      <Table.Cell> {dataPiece.totalReturn}</Table.Cell>
+    </Table.Row>
   ));
 
-  return <div>{listData}</div>;
+  return (
+    <Table sortable cell fixed>
+      <Table.Body>{listData}</Table.Body>
+    </Table>
+  );
 }
 
 export default SPList;
