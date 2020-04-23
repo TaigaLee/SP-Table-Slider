@@ -3,23 +3,6 @@ import React from "react";
 import { Table } from "semantic-ui-react";
 import "./index.css";
 
-// class SPList extends React.Component {
-//   const listData = props.data.map(dataPiece => (
-//     <Table.Row key={dataPiece.year}>
-//       <Table.Cell>{dataPiece.year}</Table.Cell>
-//       <Table.Cell> {dataPiece.totalReturn}</Table.Cell>
-//     </Table.Row>
-//   ));
-//
-//   return (
-//     <Table sortable cell fixed>
-//       <Table.Body>{listData}</Table.Body>
-//     </Table>
-//   );
-// }
-
-/* ************************************************************** */
-
 class SPList extends React.Component {
   constructor(props) {
     super();
@@ -73,7 +56,7 @@ class SPList extends React.Component {
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {_.map(data, ({ year, totalReturn }) => (
+            {_.map(data.reverse(), ({ year, totalReturn }) => (
               <Table.Row key={year}>
                 <Table.Cell>{year}</Table.Cell>
                 <Table.Cell>{totalReturn}</Table.Cell>

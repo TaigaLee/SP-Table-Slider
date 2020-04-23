@@ -7,7 +7,7 @@ class SPTable extends React.Component {
     super();
 
     this.state = {
-      data: SPData
+      data: SPData.reverse()
     };
   }
 
@@ -16,7 +16,7 @@ class SPTable extends React.Component {
   // slider thing
 
   render() {
-    return <SPList data={this.state.data.reverse()} />;
+    return <SPList data={this.state.data} />;
   }
 }
 
