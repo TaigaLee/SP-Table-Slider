@@ -2,7 +2,6 @@ import React from "react";
 import SPList from "../SPList";
 import SPData from "../data/history.json";
 import Slider from "rc-slider";
-import Tooltip from "rc-tooltip";
 import "rc-slider/assets/index.css";
 import "./index.css";
 
@@ -22,36 +21,24 @@ class SPTable extends React.Component {
         sliderValues: sliderValues
       },
       () => {
-        if (this.state.data != 94) {
-          const data = this.state.data;
-          const findIndexLow = Math.abs(2019 - this.state.sliderValues[0]);
-          const findIndexHigh = 2019 - this.state.sliderValues[1];
-          console.log(data[findIndexLow]);
-          console.log(data[findIndexHigh]);
-        } else {
-          this.setState({
-            data: SPData
-          });
-        }
+        const data = SPData;
+        const findIndexLow = Math.abs(2019 - this.state.sliderValues[0]);
+        const findIndexHigh = 2019 - this.state.sliderValues[1];
+        const newData = data
+          .slice(0, findIndexLow + 1)
+          .slice(findIndexHigh, 93);
+
+        this.setState(
+          {
+            data: newData
+          },
+          () => {
+            this.calculateCumulativeTotal();
+          }
+        );
       }
     );
   };
-
-  // updateTableData = () => {
-  //   if (this.state.data != 94) {
-  //     const data = this.state.data;
-  //     const findIndexLow = 1926 - this.state.sliderValues[0];
-  //     const findIndexHigh = Math.abs(1926 - this.state.sliderValues[1]);
-  //     console.log(findIndexHigh);
-  //     const finalData = data.slice(findIndexLow, findIndexHigh);
-  //     // this.setState({
-  //     //   sliderValues: sliderValues
-  //     // });
-  //     console.log(finalData);
-  //   } else {
-  //     console.log("reset");
-  //   }
-  // };
 
   calculateCumulativeTotal = () => {
     let total = 0;
@@ -62,6 +49,7 @@ class SPTable extends React.Component {
         total += parseFloat(dataPiece.totalReturn);
         dataPiece.cumulativeReturn = total;
       });
+    return total;
   };
 
   render() {
@@ -85,10 +73,7 @@ class SPTable extends React.Component {
           />
         </div>
         <div>
-          <SPList
-            data={this.state.data}
-            calculateCumulativeTotal={this.calculateCumulativeTotal}
-          />
+          <SPList data={this.state.data} />
         </div>
       </div>
     );

@@ -14,6 +14,15 @@ class SPList extends React.Component {
     };
   }
 
+  static getDerivedStateFromProps(props, state) {
+    if (props.data !== state.data) {
+      return {
+        data: props.data
+      };
+    }
+    return null;
+  }
+
   handleSort = clickedColumn => () => {
     const { column, data, direction } = this.state;
 
@@ -35,7 +44,6 @@ class SPList extends React.Component {
 
   render() {
     const { column, data, direction } = this.state;
-
     return (
       <div className="SPList-div">
         <Table sortable celled fixed size="small">
