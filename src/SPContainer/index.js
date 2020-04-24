@@ -17,10 +17,41 @@ class SPTable extends React.Component {
   }
 
   handleChange = sliderValues => {
-    this.setState({
-      sliderValues
-    });
+    this.setState(
+      {
+        sliderValues: sliderValues
+      },
+      () => {
+        if (this.state.data != 94) {
+          const data = this.state.data;
+          const findIndexLow = Math.abs(2019 - this.state.sliderValues[0]);
+          const findIndexHigh = 2019 - this.state.sliderValues[1];
+          console.log(data[findIndexLow]);
+          console.log(data[findIndexHigh]);
+        } else {
+          this.setState({
+            data: SPData
+          });
+        }
+      }
+    );
   };
+
+  // updateTableData = () => {
+  //   if (this.state.data != 94) {
+  //     const data = this.state.data;
+  //     const findIndexLow = 1926 - this.state.sliderValues[0];
+  //     const findIndexHigh = Math.abs(1926 - this.state.sliderValues[1]);
+  //     console.log(findIndexHigh);
+  //     const finalData = data.slice(findIndexLow, findIndexHigh);
+  //     // this.setState({
+  //     //   sliderValues: sliderValues
+  //     // });
+  //     console.log(finalData);
+  //   } else {
+  //     console.log("reset");
+  //   }
+  // };
 
   calculateCumulativeTotal = () => {
     let total = 0;
@@ -57,7 +88,6 @@ class SPTable extends React.Component {
           <SPList
             data={this.state.data}
             calculateCumulativeTotal={this.calculateCumulativeTotal}
-            sliderValues={this.state.sliderValues}
           />
         </div>
       </div>
