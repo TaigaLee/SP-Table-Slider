@@ -4,7 +4,7 @@ The project was boostrapped with create-react-app.
 
 The information from S&P 500 Total Returns by Year was used in JSON format. 
 
-To run the project for now, clone the repo and run npm start.
+To run the project: clone the repo, run 'npm install' and then 'run npm start'.
 
 ## Environment
 
