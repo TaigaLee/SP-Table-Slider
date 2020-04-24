@@ -24,11 +24,13 @@ class SPTable extends React.Component {
 
   calculateCumulativeTotal = () => {
     let total = 0;
-    this.state.data.map(dataPiece => {
-      total += parseFloat(dataPiece.totalReturn);
-      dataPiece.cumulativeReturn = total;
-    });
-    return total;
+    this.state.data
+      .slice(0)
+      .reverse()
+      .map(dataPiece => {
+        total += parseFloat(dataPiece.totalReturn);
+        dataPiece.cumulativeReturn = total;
+      });
   };
 
   render() {
