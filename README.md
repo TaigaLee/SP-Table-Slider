@@ -2,7 +2,7 @@
 
 The project was boostrapped with create-react-app.
 
-The information from S&P 500 Total Returns by Year was used is JSON format. 
+The information from S&P 500 Total Returns by Year was used in JSON format. 
 
 ## Environment
 
