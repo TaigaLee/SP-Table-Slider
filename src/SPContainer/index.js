@@ -11,13 +11,18 @@ class SPTable extends React.Component {
     super();
 
     this.state = {
-      data: SPData
+      data: SPData,
+      value: null
     };
   }
 
   // put slider here
   // probably have a change data function here for the slider
   // slider thing
+
+  onSliderchange = value => {
+    console.log("hi");
+  };
 
   calculateCumulativeTotal = () => {
     let total = 0;
@@ -47,13 +52,19 @@ class SPTable extends React.Component {
 
   render() {
     this.calculateCumulativeTotal();
+    const createSliderWithToolTip = Slider.createSliderWithTooltip;
+    const Range = createSliderWithToolTip(Slider.Range);
     return (
       <div className="Slider-div">
         <div className="Slider">
-          <Slider
+          <Range
             min={this.state.data[this.state.data.length - 1].year}
             max={this.state.data[0].year}
-            handle={this.handle}
+            defaultValue={[
+              this.state.data[this.state.data.length - 1].year,
+              this.state.data[0].year
+            ]}
+            tipFormatter={value => `${value}`}
           />
         </div>
         <div>
