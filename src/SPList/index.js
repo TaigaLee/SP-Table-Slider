@@ -14,6 +14,11 @@ class SPList extends React.Component {
     };
   }
 
+  updateTable = () => {
+    const data = this.state.data;
+    console.log(this.props.sliderValues);
+  };
+
   handleSort = clickedColumn => () => {
     const { column, data, direction } = this.state;
 
@@ -34,6 +39,7 @@ class SPList extends React.Component {
   };
 
   render() {
+    this.updateTable();
     const { column, data, direction } = this.state;
 
     return (

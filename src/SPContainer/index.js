@@ -12,16 +12,14 @@ class SPTable extends React.Component {
 
     this.state = {
       data: SPData,
-      value: null
+      sliderValues: [1926, 2019]
     };
   }
 
-  // put slider here
-  // probably have a change data function here for the slider
-  // slider thing
-
-  onSliderchange = value => {
-    console.log("hi");
+  handleChange = sliderValues => {
+    this.setState({
+      sliderValues
+    });
   };
 
   calculateCumulativeTotal = () => {
@@ -31,46 +29,33 @@ class SPTable extends React.Component {
       dataPiece.cumulativeReturn = total;
     });
     return total;
-    console.log(this.state.data);
-  };
-
-  handle = props => {
-    const Handle = Slider.Handle;
-    const { value, dragging, index, ...restProps } = props;
-    return (
-      <Tooltip
-        prefixCls="rc-slider-tooltip"
-        overlay={value}
-        visible={dragging}
-        placement="top"
-        key={index}
-      >
-        <Handle value={value} {...restProps} />
-      </Tooltip>
-    );
   };
 
   render() {
     this.calculateCumulativeTotal();
+    const { sliderValues } = this.state;
     const createSliderWithToolTip = Slider.createSliderWithTooltip;
     const Range = createSliderWithToolTip(Slider.Range);
     return (
       <div className="Slider-div">
         <div className="Slider">
+          <p>
+            Current Years: {this.state.sliderValues[0]} -{" "}
+            {this.state.sliderValues[1]}
+          </p>
           <Range
-            min={this.state.data[this.state.data.length - 1].year}
-            max={this.state.data[0].year}
-            defaultValue={[
-              this.state.data[this.state.data.length - 1].year,
-              this.state.data[0].year
-            ]}
+            min={1926}
+            max={2019}
+            defaultValue={sliderValues}
             tipFormatter={value => `${value}`}
+            onAfterChange={this.handleChange}
           />
         </div>
         <div>
           <SPList
             data={this.state.data}
             calculateCumulativeTotal={this.calculateCumulativeTotal}
+            sliderValues={this.state.sliderValues}
           />
         </div>
       </div>
