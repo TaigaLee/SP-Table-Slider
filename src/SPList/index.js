@@ -53,15 +53,25 @@ class SPList extends React.Component {
               >
                 Total Return
               </Table.HeaderCell>
+              <Table.HeaderCell
+                sorted={column === "totalReturn" ? direction : null}
+                onClick={this.handleSort("totalReturn")}
+              >
+                Cumulative Total
+              </Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {_.map(data.reverse(), ({ year, totalReturn }) => (
-              <Table.Row key={year}>
-                <Table.Cell>{year}</Table.Cell>
-                <Table.Cell>{totalReturn}</Table.Cell>
-              </Table.Row>
-            ))}
+            {_.map(
+              data.reverse(),
+              ({ year, totalReturn, cumulativeReturn }) => (
+                <Table.Row key={year}>
+                  <Table.Cell>{year}</Table.Cell>
+                  <Table.Cell>{totalReturn}</Table.Cell>
+                  <Table.Cell>{cumulativeReturn.toFixed(2)}</Table.Cell>
+                </Table.Row>
+              )
+            )}
           </Table.Body>
         </Table>
       </div>
